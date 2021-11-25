@@ -5,7 +5,8 @@ import os
 import traceback
 import copy
 
-CGTW_ROOT_BIN = __file__.replace(u"\\", u"/").split(u"ext_plugin")[0]
+CGTW_ROOT_BIN = u"C:/CgTeamWork_v6.2/bin/"
+#CGTW_ROOT_BIN = __file__.replace(u"\\", u"/").split(u"ext_plugin")[0]
 for _path in [
     CGTW_ROOT_BIN + u"base",
     CGTW_ROOT_BIN + u"lib/pyside",
@@ -23,6 +24,7 @@ QtWidgets.QApplication.addLibraryPath(CGTW_ROOT_BIN + u"lib/pyside/PySide2/plugi
 
 # cgtw
 import cgtw2
+from twlib._client import _client
 
 
 class Info_Widget(QtWidgets.QDialog):
@@ -40,15 +42,21 @@ class Info_Widget(QtWidgets.QDialog):
         text_browser.append(u"database:      %s" % str(t_tw.client.get_database()))
         text_browser.append(u"module:        %s" % str(t_tw.client.get_module()))
         text_browser.append(u"module_type:   %s" % str(t_tw.client.get_module_type()))
-        text_browser.append(u"-" * 61)
+        text_browser.append(u"-" * 50)
         text_browser.append(u"link_id:       %s" % str(t_tw.client.get_link_id()))
         text_browser.append(u"link_module:   %s" % str(t_tw.client.get_link_module()))
         text_browser.append(u"filebox_id:    %s" % str(t_tw.client.get_filebox_id()))
-        text_browser.append(u"-" * 61)
+        text_browser.append(u"-" * 50)
         text_browser.append(u"event_action:  %s" % str(t_tw.client.get_event_action()))
         text_browser.append(u"event_fields:  %s" % str(t_tw.client.get_event_fields()))
         text_browser.append(u"event_fields:  %s" % str(t_tw.client.get_event_fields()))
-
+        text_browser.append(u"-" * 50)
+        text_browser.append(u" -------------")
+        text_browser.append(u"| get_sys_key |")
+        text_browser.append(u" -------------")
+        argv = _client._client__get_argv_data()
+        for k, v in argv.items():
+            text_browser.append(u"%s:  %s" % (str(k), str(v)))
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
